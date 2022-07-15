@@ -5,14 +5,9 @@ provider "google" {
   zone    = var.zone_name
 }
 
-# Locks the version of Terraform for this particular use case
-terraform {
-  required_version = "~>0.12.0"
-}
-
 # This creates the google instance
 resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
+  name         = "opendronemapvm"
   machine_type = var.machine_size
 
   boot_disk {
@@ -37,7 +32,6 @@ resource "google_compute_instance" "vm_instance" {
     connection {
       type        = "ssh"
       host        = google_compute_address.static.address
-      private_key = file(var.private_key_path)
     }
   }
 }
