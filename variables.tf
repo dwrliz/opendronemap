@@ -25,7 +25,8 @@ variable "machine_size" {
 variable "image_name" {
   type        = string
   description = "The kind of VM this instance will become"
-  default     = "ubuntu-os-cloud/ubuntu-1804-bionic-v20190403"
+  default     = "ubuntu-os-cloud/ubuntu-2004-focal-v20220712"
+  #"ubuntu-os-cloud/ubuntu-1804-bionic-v20190403"
 }
 
 variable "script_path" {

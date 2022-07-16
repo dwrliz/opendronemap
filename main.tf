@@ -1,5 +1,6 @@
 # This is the provider used to spin up the gcloud instance
 provider "google" {
+  credentials = file("./Credentials.json")
   project = var.project_name
   region  = var.region_name
   zone    = var.zone_name
@@ -7,7 +8,7 @@ provider "google" {
 
 # This creates the google instance
 resource "google_compute_instance" "vm_instance" {
-  name         = "opendronemapvm"
+  name         = "opendronemap"
   machine_type = var.machine_size
 
   boot_disk {
@@ -21,22 +22,25 @@ resource "google_compute_instance" "vm_instance" {
 
     # Associated our public IP address to this instance
     access_config {
-      nat_ip = google_compute_address.static.address
+    # makes external IP
     }
   }
+  metadata = { startup-script = ("${file("scripts/bootstrap.sh")}") }
 
-  # We connect to our instance via Terraform and remotely executes our script using SSH
-  provisioner "remote-exec" {
-    script = var.script_path
+  #give a firewall rule to open ports
+  tags = ["http-server"]
 
-    connection {
-      type        = "ssh"
-      host        = google_compute_address.static.address
-    }
-  }
 }
 
-# We create a public IP address for our google compute instance to utilize
-resource "google_compute_address" "static" {
-  name = "vm-public-address"
+  resource "google_compute_firewall" "http-server" {
+     name = "default-allow-http-for-odm"
+     network = "default"
+
+    allow {
+    protocol = "tcp"
+    ports    = ["80", "8000"]
+  }
+
+   source_ranges = ["0.0.0.0/0"]
+   target_tags = ["http-server"]
 }
