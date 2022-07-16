@@ -1,6 +1,6 @@
 # GCE ODM Instance Bootstrapping with Terraform
  
-In this repository you will find the terraform scripts, as well as the bash script, necessary to launch a virtual machine with OpenDroneMap on it (software for processng drone flights into 3d models).
+In this repository you will find the terraform scripts, as well as the bash script, necessary to launch a virtual machine with OpenDroneMap on it (software for processng drone flights into 3d models). Not found in this repository is a JSON key you will need to generate to give Terraform the neccessary permissions, although this can be done easily here https://cloud.google.com/iam/docs/creating-managing-service-account-keys
 
 This code was written by Wiliam Wiskes and designed to run in Google Cloud. The default pre-set machine is a C2 instance with 32g of RAM and 8 CPU. I highly recommend using a compute optimized machine (C2), over an E2 or N2, as C2 instances are tuned for the High-performance computing (HPC) that this kind of modelling perfers. 
 
