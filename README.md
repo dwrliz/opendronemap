@@ -6,7 +6,7 @@ This code was written by Wiliam Wiskes and designed to run in Google Cloud. The 
 
 OpenDroneMap runs on port 8000. After this startup script has finished running navigate to:
 
-http://<insert your virtual machines ephemeral IP here>:8000/dashboard/
+http:// { insert your virtual machines ephemeral IP here } :8000/dashboard/
 
 and you will see this:
 
